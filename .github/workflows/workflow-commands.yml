@@ -21,9 +21,6 @@ jobs:
       - name: Warning
         run: echo "::warning file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
 
-      - name: Error
-        run: echo "::error file=app.js,line=1,col=5,endColumn=7::Missing semicolon"; exit 1;
-
       - name: Generate list using Markdown
         run: |
             echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
@@ -31,3 +28,6 @@ jobs:
             echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
             echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
             echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
+
+      - name: Error
+        run: echo "::error file=app.js,line=1,col=5,endColumn=7::Missing semicolon"; exit 1;
