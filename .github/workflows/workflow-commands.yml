@@ -6,4 +6,28 @@ jobs:
   Workflow-Commands:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "::error file=foo/bar/baz.json,line=79,col=19,title=Error Title::Error message many words"; exit 1;
+      - name: Group of log lines
+        run: |
+            echo "::group::My title"
+            echo "Inside group"
+            echo "::endgroup::"
+
+      - name: Debug
+        run: echo "::debug::Only visible when debugging"
+
+      - name: Notice
+        run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+
+      - name: Warning
+        run: echo "::warning file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+
+      - name: Error
+        run: echo "::error file=app.js,line=1,col=5,endColumn=7::Missing semicolon"; exit 1;
+
+      - name: Generate list using Markdown
+        run: |
+            echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+            echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
+            echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
+            echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
