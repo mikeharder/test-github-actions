@@ -1,0 +1,9 @@
+name: GitHub Actions Demo
+
+on: [push]
+
+jobs:
+  Workflow-Commands:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "::error file=foo/bar/baz.json,line=79,col=19,title={Error Title}::{Error message many words}"
