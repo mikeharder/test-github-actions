@@ -1,10 +1,14 @@
 // @ts-check
 
 const { readFile } = require("fs/promises");
+const { join } = require("path");
 
-/** @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments */
-module.exports = async ({ github, context, core }) => {
-  const file = "content.txt";
+/**
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} folder
+ */
+module.exports = async ({ github, context, core }, folder) => {
+  const file = join(folder, "content.txt");
 
   try {
     const content = await readFile(file, { encoding: "utf8" });
