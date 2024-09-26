@@ -17,16 +17,18 @@ module.exports = async ({ github, context, core }, folder, label) => {
     console.log(`File '${file}' exists.  Content:\n${content}`);
     if (content.includes("foo")) {
       if (label) {
+        console.log(`Adding label '${label}'`);
         await github.rest.issues.addLabels({
           owner: context.repo.owner,
           repo: context.repo.repo,
           issue_number: context.payload.pull_request?.number ?? -1,
           labels: [label],
-        });  
+        });
       }
+      console.log('setOutput("FOO", true)');
       core.setOutput("FOO", true);
-    }
-    else {
+    } else {
+      console.log('setOutput("FOO", false)');
       core.setOutput("FOO", false);
     }
   } catch (err) {
