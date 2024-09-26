@@ -1,0 +1,15 @@
+name: Pull Request - Completed
+
+on:
+  workflow_run:
+    workflows: ["Pull Request"]
+    types: [completed]
+
+jobs:
+  pull-request-completed:
+    name: Pull Request - Completed
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo completed
