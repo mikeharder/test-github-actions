@@ -24,10 +24,10 @@ module.exports = async ({ github, context, core }, folder, label) => {
           labels: [label],
         });  
       }
-      await appendFile(env.GITHUB_OUTPUT || "", "FOO=true");
+      await appendFile(env.GITHUB_OUTPUT || "", "FOO=true", { encoding: "utf-8"});
     }
     else {
-      await appendFile(env.GITHUB_OUTPUT || "", "FOO=false");
+      await appendFile(env.GITHUB_OUTPUT || "", "FOO=false", { encoding: "utf-8"});
     }
   } catch (err) {
     if (err.code === "ENOENT" || err.status === "ENOENT") {
