@@ -23,7 +23,7 @@ module.exports = async ({ github, context, core }, folder, label) => {
       });
     }
   } catch (err) {
-    if (err.status === "ENOENT") {
+    if (err.code === "ENOENT" || err.status === "ENOENT") {
       console.log(`File '${file}' does not exist`);
     } else {
       throw err;
