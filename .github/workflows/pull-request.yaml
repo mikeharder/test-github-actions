@@ -34,9 +34,3 @@ jobs:
         path: foo.txt
         if-no-files-found: error
         overwrite: true
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: github-output
-        path: ${{ env.GITHUB_OUTPUT }}
-        overwrite: true
