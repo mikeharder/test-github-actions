@@ -16,4 +16,4 @@ jobs:
       with:
         script: |
           const pullRequest = require('./.github/workflows/scripts/pull-request.js')
-          await pullRequest({ github, context, core }, "");
+          await pullRequest({ github, context, core }, "", "pull-request");
