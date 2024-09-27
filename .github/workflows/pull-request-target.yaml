@@ -35,5 +35,5 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const pullRequest = require('./target/.github/workflows/scripts/pull-request.js'
+            const pullRequest = require('./target/.github/workflows/scripts/pull-request.js')
             await pullRequest({ github, context, core }, "merge", "pull-request-target-merge");
