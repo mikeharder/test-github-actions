@@ -19,10 +19,10 @@ jobs:
       # Alternatively, could run scripts from target branch, to prevent PRs from modifying scripts
       # to "fake" passing results.  However, running scripts from merge branch allows for easier
       # testing of script changes in PRs, and the worst the untrusted code can do, is manipulate
-      # the output value.
+      # the output value from "false" to "true".
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
 
       # Sets output 'FOO' to true/false
       - name: Analyze merge/content.txt
@@ -36,6 +36,8 @@ jobs:
   add-label:
     name: Add Label
 
+    needs: analyze-code
+
     # Only run if previous job succeeded and set 'FOO=true'
     if: ${{ success() && needs.analyze-code.outputs.FOO == 'true' }}
 
@@ -43,8 +45,6 @@ jobs:
       pull-requests: write
 
     runs-on: ubuntu-latest
-
-    needs: analyze-code
 
     steps:
       - name: Add Label
