@@ -33,6 +33,33 @@ jobs:
             const pullRequest = require('./.github/workflows/scripts/pull-request.js')
             await pullRequest({ github, context, core }, "", "");
 
+  analyze-code-sha:
+    name: Analyze Code SHA
+
+    permissions:
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Run everything from merge branch in read-only job
+      # Alternatively, could run scripts from target branch, to prevent PRs from modifying scripts
+      # to "fake" passing results.  However, running scripts from merge branch allows for easier
+      # testing of script changes in PRs, and the worst the untrusted code can do, is manipulate
+      # the output value from "false" to "true".
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
+      # Sets output 'FOO' to true/false
+      - name: Analyze merge/content.txt
+        id: analyze
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pullRequest = require('./.github/workflows/scripts/pull-request.js')
+            await pullRequest({ github, context, core }, "", "");
+
   add-label:
     name: Add Label
 
