@@ -8,7 +8,7 @@ const { existsSync } = require("fs");
 module.exports = async ({ github, context, core }) => {
   if (existsSync("foo")) {
     console.log("Adding label 'pull-request-completed'");
-    console.log(JSON.stringify(context));
+    console.log(JSON.stringify(context, null, 2));
     // await github.rest.issues.addLabels({
     //   owner: context.repo.owner,
     //   repo: context.repo.repo,
