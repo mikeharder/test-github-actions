@@ -6,6 +6,8 @@ const { existsSync } = require("fs");
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 module.exports = async ({ github, context, core }) => {
+  console.log(JSON.stringify(context, null, 2));
+
   const fooExists = existsSync("foo");
   console.log(`fooExists: ${fooExists}`);
   if (fooExists) {
