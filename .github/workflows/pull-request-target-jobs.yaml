@@ -22,7 +22,7 @@ jobs:
       # the output value from "false" to "true".
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
 
       # Sets output 'FOO' to true/false
       - name: Analyze merge/content.txt
