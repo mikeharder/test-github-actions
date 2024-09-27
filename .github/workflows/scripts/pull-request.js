@@ -1,6 +1,6 @@
 // @ts-check
 
-const { appendFile, readFile } = require("fs/promises");
+const { readFile } = require("fs/promises");
 const { join } = require("path");
 const { env } = require("process");
 
