@@ -9,6 +9,10 @@ jobs:
   pull-request-completed:
     name: Pull Request - Completed
 
+    permissions:
+      contents: read
+      pull-requests: write
+
     runs-on: ubuntu-latest
 
     steps:
