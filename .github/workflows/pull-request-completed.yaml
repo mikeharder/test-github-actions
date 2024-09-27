@@ -12,4 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo completed
+      - uses: actions/download-artifact@v4
+        with:
+          # Must use "pattern" instead of "name" to avoid errors if artifact doesn't exist
+          pattern: foo
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Add label if artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pullRequestCompleted = require('./target/.github/workflows/scripts/pull-request-completed.js')
+            await pullRequestCompleted({ github, context, core });
+
+
