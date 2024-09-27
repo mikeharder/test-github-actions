@@ -19,7 +19,7 @@ jobs:
       # Alternatively, could run scripts from target branch, to prevent PRs from modifying scripts
       # to "fake" passing results.  However, running scripts from merge branch allows for easier
       # testing of script changes in PRs, and the worst the untrusted code can do, is manipulate
-      # the output value.
+      # the output value from "false" to "true".
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
