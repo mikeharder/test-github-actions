@@ -1,0 +1,23 @@
+name: Check Run - Completed
+
+on:
+  check_run:
+    types: [completed]
+
+jobs:
+  check-run-completed:
+    name: Check Run - Completed
+
+    permissions:
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log Context
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log(JSON.stringify(context))
