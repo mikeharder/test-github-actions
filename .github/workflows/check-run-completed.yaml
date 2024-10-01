@@ -2,7 +2,8 @@ name: Check Run - Completed
 
 on:
   check_run:
-    types: [completed]
+    types:
+      - completed
 
 jobs:
   check-run-completed:
