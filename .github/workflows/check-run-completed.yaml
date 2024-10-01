@@ -1,6 +1,7 @@
 name: Check Run - Completed
 
 on:
+  workflow_dispatch:
   check_run:
     types:
       - completed
