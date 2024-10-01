@@ -13,9 +13,19 @@ module.exports = async ({ github, context, core }) => {
   if (fooExists) {
     console.log("Adding label 'pull-request-completed'");
 
-    const owner = context.payload.workflow_run.head_repository.owner.login;
-    const repo = context.payload.workflow_run.head_repository.name;
-    const sha = context.payload.workflow_run.head_sha;
+    const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (context.payload);
+
+    const runId = payload.workflow_run.id;
+    const owner = payload.workflow_run.head_repository.owner.login;
+    const repo = payload.workflow_run.head_repository.name;
+    const sha = payload.workflow_run.head_sha;
+
+    const workflowLogs = await github.rest.actions.downloadWorkflowRunLogs({
+      owner: owner,
+      repo: repo,
+      run_id: runId,
+    });
+    console.log(`workflowLogs.url: ${workflowLogs.url}`);
 
     console.log(`Finding pull requests for '/${owner}/${repo}/${sha}'`);
     const { data: pullRequests } =
@@ -31,8 +41,8 @@ module.exports = async ({ github, context, core }) => {
     } else if (pullRequests.length === 1) {
       const prNumber = pullRequests[0].number;
       await github.rest.issues.addLabels({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner: owner,
+        repo: repo,
         issue_number: prNumber,
         labels: ["pull-request-completed"],
       });
