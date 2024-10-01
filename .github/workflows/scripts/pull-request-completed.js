@@ -15,7 +15,28 @@ module.exports = async ({ github, context, core }) => {
 
     const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (context.payload);
 
-    const pullRequests = payload.workflow_run.pull_requests;
+    // const workflowLogs = await github.rest.actions.downloadWorkflowRunLogs({
+    //   owner: context.repo.owner,
+    //   repo: context.repo.repo,
+    //   run_id: payload.workflow_run.id,
+    // });
+    // console.log(`workflowLogs.url: ${workflowLogs.url}`);
+
+    const owner = payload.workflow_run.head_repository.owner.login;
+    const repo = payload.workflow_run.head_repository.name;
+    const sha = payload.workflow_run.head_sha;
+
+    console.log(`Finding pull requests for '/${owner}/${repo}/${sha}'`);
+
+    // Must call this API, since 'payload.workflow_run.pull_requests' is empty for fork PRs
+    const { data: pullRequests } =
+      await github.rest.repos.listPullRequestsAssociatedWithCommit({
+        owner: owner,
+        repo: repo,
+        commit_sha: sha,
+      });
+
+    console.log(`Found ${pullRequests.length}`);
     if (pullRequests.length === 0) {
       console.log("No pull request associated with this commit.");
     } else if (pullRequests.length === 1) {
