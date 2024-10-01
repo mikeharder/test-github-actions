@@ -2,7 +2,8 @@ name: Check Suite - Completed
 
 on:
   check_suite:
-    types: [completed]
+    types:
+      - completed
 
 jobs:
   check-suite-completed:
@@ -11,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
       - name: Log Context
         uses: actions/github-script@v7
         with:
