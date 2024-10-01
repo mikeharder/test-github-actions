@@ -10,8 +10,6 @@ jobs:
     name: Pull Request - Completed
 
     permissions:
-      # Required to read logs of other workflow
-      actions: read
       contents: read
       pull-requests: write
 
@@ -26,6 +24,7 @@ jobs:
         with:
           # Must use "pattern" instead of "name" to avoid errors if artifact doesn't exist
           pattern: foo
+          # Must specify token and repository, to pull from the base fork in fork PRs
           github-token: ${{ github.token }}
           repository: ${{ github.repository }}
           run-id: ${{ github.event.workflow_run.id }}
