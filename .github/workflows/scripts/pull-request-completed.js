@@ -27,6 +27,8 @@ module.exports = async ({ github, context, core }) => {
     const sha = payload.workflow_run.head_sha;
 
     console.log(`Finding pull requests for '/${owner}/${repo}/${sha}'`);
+
+    // Must call this API, since 'payload.workflow_run.pull_requests' is empty for fork PRs
     const { data: pullRequests } =
       await github.rest.repos.listPullRequestsAssociatedWithCommit({
         owner: owner,
