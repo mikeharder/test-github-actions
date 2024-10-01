@@ -15,12 +15,12 @@ module.exports = async ({ github, context, core }) => {
 
     const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (context.payload);
 
-    const workflowLogs = await github.rest.actions.downloadWorkflowRunLogs({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      run_id: payload.workflow_run.id,
-    });
-    console.log(`workflowLogs.url: ${workflowLogs.url}`);
+    // const workflowLogs = await github.rest.actions.downloadWorkflowRunLogs({
+    //   owner: context.repo.owner,
+    //   repo: context.repo.repo,
+    //   run_id: payload.workflow_run.id,
+    // });
+    // console.log(`workflowLogs.url: ${workflowLogs.url}`);
 
     const owner = payload.workflow_run.head_repository.owner.login;
     const repo = payload.workflow_run.head_repository.name;
