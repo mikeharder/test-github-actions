@@ -8,9 +8,6 @@ jobs:
   check-run-completed:
     name: Check Run - Completed
 
-    permissions:
-      contents: read
-
     runs-on: ubuntu-latest
 
     steps:

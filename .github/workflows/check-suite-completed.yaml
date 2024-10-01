@@ -8,9 +8,6 @@ jobs:
   check-suite-completed:
     name: Check Suite - Completed
 
-    permissions:
-      contents: read
-
     runs-on: ubuntu-latest
 
     steps:
