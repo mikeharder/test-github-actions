@@ -1,6 +1,7 @@
 name: Check Suite - Completed
 
 on:
+  workflow_dispatch: 
   check_suite:
     types:
       - completed
@@ -16,4 +17,4 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            console.log(JSON.stringify(context))
+            console.log(JSON.stringify(context, null, 2))
