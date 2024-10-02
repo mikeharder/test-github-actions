@@ -10,6 +10,8 @@ const { env } = require("process");
  * @param {string?} label
  */
 module.exports = async ({ github, context, core }, folder, label) => {
+  console.log(JSON.stringify(context, null, 2));
+
   const file = join(folder, "content.txt");
 
   try {
